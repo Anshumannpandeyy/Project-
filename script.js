@@ -132,11 +132,6 @@ const heartsContainer = document.querySelector('.hearts-container');
 function createElement(container, emoji, className, durationRange) {
     if (!container) return;
 
-    // limit DOM nodes (IMPORTANT FIX)
-    if (container.children.length > 25) {
-        container.removeChild(container.firstChild);
-    }
-
     const el = document.createElement('div');
     el.className = className;
     el.textContent = emoji;
@@ -148,13 +143,11 @@ function createElement(container, emoji, className, durationRange) {
     el.style.animation = `float ${durationRange}s linear`;
 
     container.appendChild(el);
-
-    setTimeout(() => el.remove(), 10000);
 }
 
 /* Reduced frequency = NO LAG */
-setInterval(() => createElement(petalsContainer, '🌸', 'petal', 8), 900);
-setInterval(() => createElement(heartsContainer, '❤️', 'heart', 10), 1300);
+setInterval(() => createElement(petalsContainer, '🌸', 'petal', 8), 2000);
+setInterval(() => createElement(heartsContainer, '❤️', 'heart', 10), 2500);
 
 /* =========================
    SHARE BUTTON (SAFE)
@@ -253,4 +246,4 @@ document.querySelectorAll('.btn, .music-btn').forEach(btn => {
             btn.click();
         }
     });
-});
+})
