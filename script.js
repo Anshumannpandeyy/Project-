@@ -1,20 +1,13 @@
 /* ============================================
-   ROMANTIC WEBSITE - OPTIMIZED JAVASCRIPT
+   CLEAN ROMANTIC WEBSITE JS (FIXED)
    ============================================ */
 
-/* =========================
-   SAFE ELEMENT SELECTOR
-========================= */
-
+/* SAFE SELECTOR */
 const $ = (id) => document.getElementById(id);
 
-/* =========================
-   MUSIC SYSTEM (SAFE)
-========================= */
-
+/* MUSIC */
 const musicBtn = $('musicBtn');
 const backgroundMusic = $('backgroundMusic');
-
 let isMusicPlaying = false;
 
 if (musicBtn && backgroundMusic) {
@@ -31,219 +24,120 @@ if (musicBtn && backgroundMusic) {
                 musicBtn.classList.add('playing');
             }
             isMusicPlaying = !isMusicPlaying;
-        } catch (e) {
-            alert("Tap again to enable music 🎵");
-        }
+        } catch (e) {}
+        isMusicPlaying = !isMusicPlaying;
     });
 }
 
-/* =========================
-   LOVE COUNTER
-========================= */
-
+/* COUNTER */
 const counterDisplay = $('counter');
 
 function updateCounter() {
     if (!counterDisplay) return;
 
     const startDate = new Date('2025-01-01T00:00:00').getTime();
-    const now = Date.now();
-
     counterDisplay.textContent =
-        Math.floor((now - startDate) / 1000).toLocaleString();
+        Math.floor((Date.now() - startDate) / 1000).toLocaleString();
 }
 
 updateCounter();
 setInterval(updateCounter, 1000);
 
-/* =========================
-   FORGIVENESS METER (OPTIMIZED)
-========================= */
-
+/* FORGIVENESS METER */
 const meterFill = $('meterFill');
 const meterPercentage = $('meterPercentage');
 const meterStatus = $('meterStatus');
 const meterSection = $('forgiveness');
 
-let meterInitialized = false;
+let meterDone = false;
 
-function initializeForgivenessMeter() {
+function runMeter() {
     if (!meterFill || !meterPercentage || !meterStatus) return;
 
-    const statusMessages = [
-        'Calibrating love frequency...',
-        'Scanning emotional depth...',
-        'Syncing heart signals...',
-        'Processing affection index...',
-    ];
-
-    meterStatus.textContent =
-        statusMessages[Math.floor(Math.random() * statusMessages.length)];
+    meterStatus.textContent = "Loading...";
 
     setTimeout(() => {
-        const target = 100; // 🔥 FIXED 100%
-
         let current = 0;
-        const step = target / 25;
+        const target = 100;
 
         const interval = setInterval(() => {
-            current += step;
+            current += 4;
 
             if (current >= target) {
                 current = target;
                 clearInterval(interval);
-
-                meterStatus.textContent =
-                    `Love locked at ${target}% ❤️`;
+                meterStatus.textContent = "Complete ❤️";
             }
 
-            meterFill.style.width = current + '%';
-            meterPercentage.textContent = Math.floor(current) + '%';
-
+            meterFill.style.width = current + "%";
+            meterPercentage.textContent = current + "%";
         }, 40);
-    }, 1200);
+    }, 800);
 }
 
-/* =========================
-   INTERSECTION OBSERVER (SAFE)
-========================= */
-
 if (meterSection) {
-    const meterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !meterInitialized) {
-                initializeForgivenessMeter();
-                meterInitialized = true;
-                meterObserver.disconnect();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting && !meterDone) {
+                runMeter();
+                meterDone = true;
             }
         });
     }, { threshold: 0.5 });
 
-    meterObserver.observe(meterSection);
+    observer.observe(meterSection);
 }
 
-/* =========================
-   FLOATING ELEMENTS (OPTIMIZED)
-========================= */
-
+/* FLOATING ELEMENTS (SAFE LIMIT) */
 const petalsContainer = document.querySelector('.petals-container');
 const heartsContainer = document.querySelector('.hearts-container');
 
-function createElement(container, emoji, className, durationRange) {
+function spawn(container, emoji, time) {
     if (!container) return;
 
+    if (container.children.length > 20) {
+        container.removeChild(container.firstChild);
+    }
+
     const el = document.createElement('div');
-    el.className = className;
     el.textContent = emoji;
-
-    el.style.left = Math.random() * window.innerWidth + 'px';
-    el.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
-    el.style.opacity = (0.3 + Math.random() * 0.5);
-
-    el.style.animation = `float ${durationRange}s linear`;
+    el.style.position = 'absolute';
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.top = "-10px";
+    el.style.fontSize = "18px";
+    el.style.animation = `float ${time}s linear`;
 
     container.appendChild(el);
+
+    setTimeout(() => el.remove(), 10000);
 }
 
-/* Reduced frequency = NO LAG */
-setInterval(() => createElement(petalsContainer, '🌸', 'petal', 8), 2000);
-setInterval(() => createElement(heartsContainer, '❤️', 'heart', 10), 2500);
+setInterval(() => spawn(petalsContainer, '🌸', 8), 1200);
+setInterval(() => spawn(heartsContainer, '❤️', 10), 1500);
 
-/* =========================
-   SHARE BUTTON (SAFE)
-========================= */
-
+/* SHARE */
 const shareBtn = $('shareBtn');
 
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
-        const text = "A romantic message 💕 from Anshuman";
         const url = location.href;
 
         try {
             if (navigator.share) {
                 await navigator.share({
-                    title: "A Message 💕",
-                    text,
+                    title: "💕",
+                    text: "A message",
                     url
                 });
-            } else {
-                await navigator.clipboard.writeText(text + " " + url);
-                alert("Copied to clipboard 💕");
             }
-        } catch (e) {
-            console.log("Share failed");
-        }
+        } catch (e) {}
     });
 }
 
-/* =========================
-   PAGE FADE IN
-========================= */
-
+/* PAGE READY */
 document.addEventListener('DOMContentLoaded', () => {
     document.body.style.opacity = '1';
 });
 
-/* =========================
-   SMOOTH SCROLL
-========================= */
-
-
-/* =========================
-   HEART CLICK EASTER EGG
-========================= */
-
-let roseClicks = 0;
-
-document.querySelector('.rose-emoji')?.addEventListener('click', () => {
-    roseClicks++;
-
-    if (roseClicks >= 5) {
-        roseClicks = 0;
-        createConfetti();
-    }
-});
-
-function createConfetti() {
-    const items = ['🌹', '✨', '💕', '💌'];
-
-    for (let i = 0; i < 15; i++) {
-        const el = document.createElement('div');
-        el.textContent = items[Math.floor(Math.random() * items.length)];
-        el.style.position = 'fixed';
-        el.style.left = Math.random() * 100 + 'vw';
-        el.style.top = '40%';
-        el.style.fontSize = '2rem';
-        el.style.animation = 'fall 2.5s ease-out forwards';
-        document.body.appendChild(el);
-
-        setTimeout(() => el.remove(), 3000);
-    }
-}
-
-/* Confetti animation */
-const style = document.createElement('style');
-style.textContent = `
-@keyframes fall {
-    to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
-}`;
-document.head.appendChild(style);
-
-/* =========================
-   ACCESSIBILITY
-========================= */
-
-document.querySelectorAll('.btn, .music-btn').forEach(btn => {
-    btn.setAttribute('tabindex', '0');
-
-    btn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            btn.click();
-        }
-    });
-})
+/* ❌ IMPORTANT: NO SCROLL LOCK ANYMORE */
+/* (ye hi tumhara main bug tha) */
