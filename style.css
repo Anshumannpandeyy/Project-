@@ -233,11 +233,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .final-message {
-    font-size: 3rem;
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg, var(--accent-pink), #ff9999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    max-width: 850px;
+    margin: 40px auto 0;
+    font-size: 1rem;
+    line-height: 1.9;
+    text-align: left;
+    color: var(--dark-text);
+    font-family: 'Poppins', sans-serif;
+    background: none;
+    -webkit-text-fill-color: initial;
+}
+
+.final-message p {
+    margin-bottom: 22px;
 }
 
 /* ============================================
@@ -294,5 +302,9 @@ h1, h2, h3, h4, h5, h6 {
     .hero-title { font-size: 3rem; }
     .section-title { font-size: 2.2rem; }
     .counter-display { font-size: 2rem; }
-    .final-message { font-size: 2.2rem; }
+
+    .final-message {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
 }
