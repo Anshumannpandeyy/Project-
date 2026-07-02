@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message For You 💕</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="opacity:0">
+
+    <!-- Background FX -->
+    <div class="petals-container"></div>
+    <div class="hearts-container"></div>
+
+    <!-- Music -->
+    <button class="music-btn" id="musicBtn">🎵</button>
+
+    <audio id="backgroundMusic" loop>
+        <source src="ishq-wala-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+
+            <p class="hero-small-text">A message for you</p>
+            <h1 class="hero-title">Anshika</h1>
+
+            <p class="hero-subtitle">
+                There are things I should have said sooner.<br>
+                This is my attempt.
+            </p>
+
+            <!-- FIX: JS HOOK ADDED -->
+            <button class="btn btn-primary read-heart-btn">
+                Read My Heart 🌹
+            </button>
+
+            <div class="counter-container">
+                <p class="counter-label">Seconds since I started missing you</p>
+                <div class="counter-display" id="counter">0</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MEMORIES -->
+    <section class="memories" id="memories">
+        <h2 class="section-title">Everything I never said</h2>
+
+        <div class="cards-grid">
+
+            <div class="memory-card">I know I hurt you.</div>
+            <div class="memory-card">You deserved better from me.</div>
+            <div class="memory-card">My heart still chooses you.</div>
+            <div class="memory-card">I miss us.</div>
+            <div class="memory-card">You are still my favourite person.</div>
+            <div class="memory-card">I'm sorry for the pain.</div>
+            <div class="memory-card">I would still choose you.</div>
+            <div class="memory-card">Please don't let this end.</div>
+
+        </div>
+    </section>
+
+    <!-- ONE LAST THING -->
+    <section class="one-last-thing" id="oneLast">
+
+        <h2 class="section-title">One last thing...</h2>
+
+        <!-- IMPORTANT: JS SAFE LONG TEXT BOX -->
+        <div class="one-last-content">
+            <p class="final-message">
+                Miss you
+            </p>
+        </div>
+
+    </section>
+
+    <!-- FORGIVENESS METER -->
+    <section class="forgiveness-meter" id="forgiveness">
+
+        <div class="meter-card">
+
+            <h3 class="meter-title">Forgiveness Meter</h3>
+
+            <div class="meter-container">
+                <div class="meter-fill" id="meterFill"></div>
+                <div class="meter-percentage" id="meterPercentage">0%</div>
+            </div>
+
+            <p class="meter-status" id="meterStatus">Calibrating...</p>
+
+        </div>
+
+    </section>
+
+    <!-- FINAL -->
+    <section class="final-section" id="final">
+
+        <div class="final-content">
+
+            <div class="rose-emoji">🌹</div>
+
+            <h2 class="final-title">You are still my favourite</h2>
+
+            <p class="final-text">
+                In every version of this life — I would still choose you.
+            </p>
+
+            <p class="signature">— Anshuman</p>
+
+            <button class="btn btn-primary" id="shareBtn">
+                Share This Letter 🌹
+            </button>
+
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
