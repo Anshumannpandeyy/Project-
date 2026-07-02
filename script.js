@@ -1,13 +1,20 @@
 /* ============================================
-   CLEAN ROMANTIC WEBSITE JS (FIXED)
+   CLEAN ROMANTIC WEBSITE - STABLE VERSION
    ============================================ */
 
-/* SAFE SELECTOR */
+/* =========================
+   SAFE SELECTOR
+========================= */
+
 const $ = (id) => document.getElementById(id);
 
-/* MUSIC */
+/* =========================
+   MUSIC SYSTEM (STABLE)
+========================= */
+
 const musicBtn = $('musicBtn');
 const backgroundMusic = $('backgroundMusic');
+
 let isMusicPlaying = false;
 
 if (musicBtn && backgroundMusic) {
@@ -24,26 +31,35 @@ if (musicBtn && backgroundMusic) {
                 musicBtn.classList.add('playing');
             }
             isMusicPlaying = !isMusicPlaying;
-        } catch (e) {}
-        isMusicPlaying = !isMusicPlaying;
+        } catch (e) {
+            console.log("Music blocked until user interaction");
+        }
     });
 }
 
-/* COUNTER */
+/* =========================
+   LOVE COUNTER (SAFE)
+========================= */
+
 const counterDisplay = $('counter');
 
 function updateCounter() {
     if (!counterDisplay) return;
 
     const startDate = new Date('2025-01-01T00:00:00').getTime();
+    const now = Date.now();
+
     counterDisplay.textContent =
-        Math.floor((Date.now() - startDate) / 1000).toLocaleString();
+        Math.floor((now - startDate) / 1000).toLocaleString();
 }
 
 updateCounter();
 setInterval(updateCounter, 1000);
 
-/* FORGIVENESS METER */
+/* =========================
+   FORGIVENESS METER (CLEAN)
+========================= */
+
 const meterFill = $('meterFill');
 const meterPercentage = $('meterPercentage');
 const meterStatus = $('meterStatus');
@@ -54,33 +70,40 @@ let meterDone = false;
 function runMeter() {
     if (!meterFill || !meterPercentage || !meterStatus) return;
 
-    meterStatus.textContent = "Loading...";
+    const messages = [
+        "Calibrating love...",
+        "Checking emotions...",
+        "Syncing hearts...",
+        "Finalizing connection..."
+    ];
 
-    setTimeout(() => {
-        let current = 0;
-        const target = 100;
+    meterStatus.textContent =
+        messages[Math.floor(Math.random() * messages.length)];
 
-        const interval = setInterval(() => {
-            current += 4;
+    let current = 0;
+    const target = 100;
 
-            if (current >= target) {
-                current = target;
-                clearInterval(interval);
-                meterStatus.textContent = "Complete ❤️";
-            }
+    const interval = setInterval(() => {
+        current += 2;
 
-            meterFill.style.width = current + "%";
-            meterPercentage.textContent = current + "%";
-        }, 40);
-    }, 800);
+        if (current >= target) {
+            current = target;
+            clearInterval(interval);
+            meterStatus.textContent = "Love Locked ❤️ 100%";
+        }
+
+        meterFill.style.width = current + "%";
+        meterPercentage.textContent = current + "%";
+
+    }, 40);
 }
 
 if (meterSection) {
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting && !meterDone) {
-                runMeter();
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !meterDone) {
                 meterDone = true;
+                runMeter();
             }
         });
     }, { threshold: 0.5 });
@@ -88,11 +111,14 @@ if (meterSection) {
     observer.observe(meterSection);
 }
 
-/* FLOATING ELEMENTS (SAFE LIMIT) */
+/* =========================
+   FLOATING EFFECTS (LIMITED - NO LAG)
+========================= */
+
 const petalsContainer = document.querySelector('.petals-container');
 const heartsContainer = document.querySelector('.hearts-container');
 
-function spawn(container, emoji, time) {
+function spawn(container, emoji, className) {
     if (!container) return;
 
     if (container.children.length > 20) {
@@ -100,44 +126,67 @@ function spawn(container, emoji, time) {
     }
 
     const el = document.createElement('div');
+    el.className = className;
     el.textContent = emoji;
-    el.style.position = 'absolute';
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.top = "-10px";
-    el.style.fontSize = "18px";
-    el.style.animation = `float ${time}s linear`;
+
+    el.style.left = Math.random() * window.innerWidth + "px";
+    el.style.opacity = Math.random() * 0.5 + 0.3;
+    el.style.fontSize = (0.8 + Math.random()) + "rem";
+    el.style.animation = "float 6s linear";
 
     container.appendChild(el);
 
-    setTimeout(() => el.remove(), 10000);
+    setTimeout(() => el.remove(), 8000);
 }
 
-setInterval(() => spawn(petalsContainer, '🌸', 8), 1200);
-setInterval(() => spawn(heartsContainer, '❤️', 10), 1500);
+setInterval(() => spawn(petalsContainer, "🌸", "petal"), 2500);
+setInterval(() => spawn(heartsContainer, "❤️", "heart"), 3000);
 
-/* SHARE */
+/* =========================
+   SHARE BUTTON
+========================= */
+
 const shareBtn = $('shareBtn');
 
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
+        const text = "A romantic message 💕";
         const url = location.href;
 
         try {
             if (navigator.share) {
                 await navigator.share({
-                    title: "💕",
-                    text: "A message",
+                    title: "Message 💕",
+                    text,
                     url
                 });
+            } else {
+                await navigator.clipboard.writeText(text + " " + url);
+                alert("Copied 💕");
             }
         } catch (e) {}
     });
 }
 
-/* PAGE READY */
+/* =========================
+   PAGE LOAD FADE
+========================= */
+
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.style.opacity = '1';
+    document.body.style.opacity = "1";
 });
 
-/* ❌ IMPORTANT: NO SCROLL LOCK ANYMORE */
-/* (ye hi tumhara main bug tha) */
+/* =========================
+   KEYBOARD ACCESSIBILITY
+========================= */
+
+document.querySelectorAll('.btn, .music-btn').forEach(btn => {
+    btn.setAttribute('tabindex', '0');
+
+    btn.addEventListener('keydown', (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+        }
+    });
+});
