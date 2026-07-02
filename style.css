@@ -1,6 +1,6 @@
 /* ============================================
-   ROMANTIC WEBSITE - STABLE FULL CSS
-   SCROLL SAFE + LIGHT ANIMATIONS
+   CLEAN ROMANTIC WEBSITE CSS
+   STABLE + NO SCROLL BUG + SAFE ANIMATIONS
 ============================================ */
 
 /* RESET */
@@ -14,11 +14,11 @@
     --bg: #fff7f5;
     --pink: #ffb3a7;
     --soft: #ffe4e1;
-    --text: #4a4a4a;
+    --text: #3f3f3f;
 }
 
 /* =========================
-   GLOBAL FIX (MOST IMPORTANT PART)
+   GLOBAL SCROLL FIX (CRITICAL)
 ========================= */
 
 html, body {
@@ -33,11 +33,12 @@ html, body {
     -webkit-overflow-scrolling: touch;
 }
 
-/* IMPORTANT: DO NOT LOCK HEIGHT */
+/* BODY SAFE */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--bg), #fff0ec);
+    background: linear-gradient(135deg, var(--bg), #fff1ee);
     color: var(--text);
+    line-height: 1.6;
 }
 
 /* =========================
@@ -56,8 +57,8 @@ h1, h2, h3 {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 40px 20px;
 }
@@ -69,19 +70,18 @@ h1, h2, h3 {
 
 .hero-subtitle {
     font-size: 1.2rem;
-    color: #777;
-    margin-top: 10px;
+    opacity: 0.8;
 }
 
 /* =========================
-   BUTTONS
+   BUTTON
 ========================= */
 
 .btn {
     margin-top: 20px;
     padding: 12px 24px;
-    border: none;
     border-radius: 30px;
+    border: none;
     background: var(--pink);
     color: white;
     cursor: pointer;
@@ -103,22 +103,20 @@ h1, h2, h3 {
 }
 
 /* =========================
-   MEMORIES SECTION
+   SECTIONS
 ========================= */
 
-.memories {
+section {
     padding: 80px 20px;
 }
 
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
-}
+/* =========================
+   MEMORIES GRID
+========================= */
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
 }
 
@@ -126,12 +124,11 @@ h1, h2, h3 {
     background: var(--soft);
     padding: 20px;
     border-radius: 15px;
-    text-align: center;
-    transition: transform 0.3s ease;
+    transition: 0.3s;
 }
 
 .memory-card:hover {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-6px);
 }
 
 /* =========================
@@ -141,7 +138,6 @@ h1, h2, h3 {
 .final-message {
     max-width: 800px;
     margin: auto;
-    padding: 40px 20px;
     line-height: 1.8;
 }
 
@@ -151,17 +147,17 @@ h1, h2, h3 {
 
 .meter-container {
     width: 100%;
-    height: 25px;
+    height: 20px;
     background: #ffe0dc;
-    border-radius: 20px;
+    border-radius: 50px;
     overflow: hidden;
 }
 
 .meter-fill {
-    height: 100%;
     width: 0%;
+    height: 100%;
     background: var(--pink);
-    transition: width 0.8s ease;
+    transition: width 1s ease;
 }
 
 /* =========================
@@ -170,7 +166,7 @@ h1, h2, h3 {
 
 .final-section {
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
 }
 
 .rose-emoji {
@@ -179,7 +175,7 @@ h1, h2, h3 {
 }
 
 /* =========================
-   FLOATING ANIMATIONS (SAFE)
+   FLOATING ANIMATION LAYER
 ========================= */
 
 .petals-container,
@@ -195,17 +191,55 @@ h1, h2, h3 {
     position: absolute;
     opacity: 0.5;
     animation: float 8s linear forwards;
-    will-change: transform;
 }
 
-/* CUTE FLOAT ANIMATION */
+/* FLOAT ANIMATION */
 @keyframes float {
     0% {
         transform: translateY(-10vh) translateX(0) rotate(0deg);
         opacity: 0;
     }
-    20% {
-        opacity: 0.8;
-    }
     100% {
         transform: translateY(110vh) translateX(60px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid var(--pink);
+    background: white;
+    z-index: 10;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .counter-display {
+        font-size: 1.8rem;
+    }
+
+    section {
+        padding: 50px 15px;
+    }
+
+    .petal, .heart {
+        opacity: 0.4;
+        animation-duration: 10s;
+    }
+       }
