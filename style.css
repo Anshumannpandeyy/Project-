@@ -29,6 +29,7 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-anchor: none;
 }
 
 body {
@@ -307,4 +308,4 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.95rem;
         line-height: 1.8;
     }
-}
+   }
